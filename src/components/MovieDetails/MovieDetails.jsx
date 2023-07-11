@@ -1,16 +1,12 @@
-import { fetchMovieDetails } from 'components/services/moviesApi';
+import { useHttp } from 'hooks/useHttp';
+import { movieReleaseYear } from 'services/formatDate';
+import { fetchMovieDetails } from 'services/moviesApi';
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
-
-  useEffect(() => {
-    fetchMovieDetails(movieId).then(data => setMovieDetails(data));
-  }, [movieId]);
+  const [movieDetails] = useHttp(fetchMovieDetails, movieId);
 
   if (!movieDetails) return;
 
@@ -22,35 +18,36 @@ const MovieDetails = () => {
       <div>
         <div>
           <img
-            src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                : `${posterDefault}`
-            }
+            // src={
+            //   poster_path
+            //     ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+            //     : `${posterDefault}`
+            // }
             alt={title}
             width="200"
           />
-          <h2>{title}</h2>
-          <p>User score: {vote_average?.toFixed(3)}%</p>
+          <h2>{title} ({movieReleaseYear(release_date)})</h2>
+          <p>User score: {Math.round(Number(vote_average) * 10)}%</p>
           <h3>Overview</h3>
           <p>{overview}</p>
           <h3>Genres</h3>
           <ul>
-          {genres && genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
+            {genres &&
+              genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
           </ul>
         </div>
 
         <hr />
-<h4>Additional information</h4>
-<ul>
-    <li>
-    <Link to="cast">Cast</Link>
-    </li>
-    <li>
-    <Link to="reviews">Reviews</Link>
-    </li>
-</ul>
-
+        <h4>Additional information</h4>
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+        <Outlet />
       </div>
     </>
   );
