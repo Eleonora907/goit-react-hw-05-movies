@@ -29,7 +29,7 @@ export const fetchMovieCredits = async id => {
       language: 'en-US',
     },
   });
-  return response.data;
+  return response.data.cast;
 };
 
 export const fetchMovieReviews = async id => {
@@ -39,7 +39,7 @@ export const fetchMovieReviews = async id => {
       language: 'en-US',
     },
   });
-  return response.data;
+  return response.data.results;
 };
 
 export const fetchSearchMovies = async query => {

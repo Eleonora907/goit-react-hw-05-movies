@@ -1,48 +1,39 @@
 import { useHttp } from 'hooks/useHttp';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'services/moviesApi';
+import noImageAvailable from './../../services/no_image_available.jpg';
+import { MovieDescContainer } from './MovieDetails.styled';
 
 const MovieCast = () => {
-
-  // const { movieId } = useParams();
-  // const [movieCast, setMovieCast] = useState([]);
-
-  // useEffect(() => {
-  //   try {
-  //     fetchMovieCredits(movieId).then(res => setMovieCast(res));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [movieId]);
-
   const { movieId } = useParams();
-  const [cast] = useHttp(fetchMovieCredits, movieId);
+  const [casts] = useHttp(fetchMovieCredits, movieId);
 
-  if (!cast) return null;
-
-  const { id, profile_path, name, character } = cast;
+  if (casts.length === 0) {
+    return <p>We don`t have any casts for this movie.</p>;
+  }
 
   return (
-    <div>
+    <MovieDescContainer>
       <ul>
-        {cast && cast.map(() => (
-          <li key={id}>
-            {/* <img
-              src={
-                profile_path
-                  ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                  : `${noProfilePhoto}`
-              }
-              alt={name}
-              width="80"
-            /> */}
-            <p>{name}</p>
-            <p>Character: {character}</p>
-          </li>
-        ))}
+        {casts &&
+          casts.map(cast => (
+            <li key={cast.id}>
+              <img
+                src={
+                  cast.profile_path
+                    ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
+                    : `${noImageAvailable}`
+                }
+                alt={cast.name}
+                width="150"
+              />
+              <p>{cast.name}</p>
+              <p>Character: {cast.character}</p>
+            </li>
+          ))}
       </ul>
-    </div>
+    </MovieDescContainer>
   );
 };
 

@@ -1,11 +1,15 @@
-import { TrendingMoviesList } from 'components/TrendingMoviesList/TrendingMoviesList';
+import MoviesList from 'components/MoviesList/MoviesList';
+import { useHttp } from 'hooks/useHttp';
 import React from 'react';
+import { fetchTrendingMovies } from 'services/moviesApi';
+import { MainTitle } from './Home.styled';
 
 const Home = () => {
+  const [movies] = useHttp(fetchTrendingMovies);
   return (
     <>
-      <h1>Trending today</h1>
-      <TrendingMoviesList />
+      <MainTitle>Trending today</MainTitle>
+      <MoviesList movies={movies} />
     </>
   );
 };

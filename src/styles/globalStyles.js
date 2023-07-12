@@ -4,6 +4,8 @@ export default createGlobalStyle`
 body {
   font-family: sans-serif;
   line-height: 1.5;
+  background-color: darkblue;
+  color: white;
 }
 h1,
 h2,
@@ -18,7 +20,7 @@ ul,
 ol {
   margin: 0;
   padding: 0;
-  /* list-style: none; */
+  list-style: none;
 }
 
 img {
@@ -26,16 +28,11 @@ img {
   max-width: 100%;
   height: auto;
 }
-button {
-    padding: 0;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
-    cursor: pointer;
-  }
+
 a {
   text-decoration: none;
-}
+  color: white;
+  font-size: 20px;
+  margin: 10px;}
 
   `;
