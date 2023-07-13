@@ -15,7 +15,7 @@ const MovieDetails = () => {
   const [movieDetails] = useHttp(fetchMovieDetails, movieId);
   const location = useLocation();
 
-  if (!movieDetails.length) return null;
+  if (movieDetails?.length === 0) return null;
 
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movieDetails;
