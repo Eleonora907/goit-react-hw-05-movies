@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'services/moviesApi';
 import noImageAvailable from './../../services/no_image_available.jpg';
-import { MovieDescContainer } from './MovieDetails.styled';
+import { MovieDescContainer } from '../../pages/MovieDetails/MovieDetails.styled';
 
 const MovieCast = () => {
   const { movieId } = useParams();

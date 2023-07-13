@@ -2,7 +2,7 @@ import { useHttp } from 'hooks/useHttp';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'services/moviesApi';
-import { MovieDescContainer, MovieReviewsList } from './MovieDetails.styled';
+import { MovieDescContainer, MovieReviewsList } from '../../../pages/MovieDetails/MovieDetails.styled';
 
 const MovieReviews = () => {
   const { movieId } = useParams();

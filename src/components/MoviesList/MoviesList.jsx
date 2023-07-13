@@ -13,22 +13,21 @@ const MoviesList = ({ movies }) => {
   return (
     <div>
       <MoviesListStyled>
-        {movies &&
-          movies.map(movie => (
-            <MovieItem key={movie.id}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                <MovieItemImage
-                  src={
-                    movie.poster_path
-                      ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                      : `${noImageAvailable}`
-                  }
-                  alt={movie.title}
-                />
-                {movie.title}
-              </Link>
-            </MovieItem>
-          ))}
+        {movies.map(movie => (
+          <MovieItem key={movie.id}>
+            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+              <MovieItemImage
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                    : `${noImageAvailable}`
+                }
+                alt={movie.title}
+              />
+              {movie.title}
+            </Link>
+          </MovieItem>
+        ))}
       </MoviesListStyled>
     </div>
   );
